@@ -3,7 +3,12 @@ name: Update README cards
 on:
   schedule:
     - cron: "0 0 * * 0" # Runs once a week at midnight
-  workflow_dispatch:
+  pull_request:
+    types: [synchronize, reopened, ready_for_review]
+  workflow_dispatch:  # Allows manual triggering of the workflow
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -21,7 +26,7 @@ jobs:
           card: stats
           options: username=${{ github.repository_owner }}&show_icons=true&rank_icon=percentile&show=reviews,prs_merged&theme=catppuccin_mocha
           path: profile/stats-dark.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PRIVATE_TOKEN }}
 
       - name: Generate stats card (light)
         uses: readme-tools/github-readme-stats-action@v1
@@ -29,7 +34,7 @@ jobs:
           card: stats
           options: username=${{ github.repository_owner }}&show_icons=true&rank_icon=percentile&show=reviews,prs_merged&theme=catppuccin_latte
           path: profile/stats-light.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PRIVATE_TOKEN }}
 
       - name: Generate top languages card (dark)
         uses: readme-tools/github-readme-stats-action@v1
@@ -37,7 +42,7 @@ jobs:
           card: top-langs
           options: username=${{ github.repository_owner }}&layout=compact&langs_count=6&theme=catppuccin_mocha
           path: profile/top-langs-dark.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PRIVATE_TOKEN }}
 
       - name: Generate top languages card (light)
         uses: readme-tools/github-readme-stats-action@v1
@@ -45,7 +50,7 @@ jobs:
           card: top-langs
           options: username=${{ github.repository_owner }}&layout=compact&langs_count=6&theme=catppuccin_latte
           path: profile/top-langs-light.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PRIVATE_TOKEN }}
 
       - name: Generate pin card - AirbrakesV2 (dark)
         uses: readme-tools/github-readme-stats-action@v1
