@@ -46,7 +46,7 @@ jobs:
           # Fast-forward to the exact current remote state so the push is
           # always a clean fast-forward — no rebase, no merge, no conflicts
           git fetch origin
-          git checkout -B "$BRANCH" "origin/$BRANCH"
+          git checkout -f -B "$BRANCH" "origin/$BRANCH"
 
           # Restore the generated SVGs on top of the latest remote commit
           mkdir -p profile
