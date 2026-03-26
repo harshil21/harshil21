@@ -9,7 +9,7 @@
         aria-labelledby="descId"
       >
         <title id="titleId">Harshil's GitHub Stats, Rank: A</title>
-        <desc id="descId">Total Stars Earned: 49, Total Commits  (last year) : 593, Total PRs: 415, Total PRs Merged: 382, Total PRs Reviewed: 94, Total Issues: 168, Contributed to (last year): 26</desc>
+        <desc id="descId">Total Stars Earned: 49, Total Commits  (last year) : 608, Total PRs: 415, Total PRs Merged: 382, Total PRs Reviewed: 95, Total Issues: 168, Contributed to (last year): 26</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -73,7 +73,7 @@
         stroke-dashoffset: 251.32741228718345;
       }
       to {
-        stroke-dashoffset: 53.20819772044225;
+        stroke-dashoffset: 52.878570878667055;
       }
     }
   
@@ -146,7 +146,7 @@
           Top
         </text>
         <text x="-5" y="12" alignment-baseline="central" dominant-baseline="central" text-anchor="middle" data-testid="percentile-rank-value" class="rank-percentile-text">
-          21.2%
+          21.0%
         </text>
       
         </g>
@@ -180,7 +180,7 @@
         x="219.01"
         y="12.5"
         data-testid="commits"
-      >593</text>
+      >608</text>
     </g>
   </g><g transform="translate(0, 50)">
     <g class="stagger" style="animation-delay: 750ms" transform="translate(25, 0)">
@@ -225,7 +225,7 @@
         x="219.01"
         y="12.5"
         data-testid="reviews"
-      >94</text>
+      >95</text>
     </g>
   </g><g transform="translate(0, 125)">
     <g class="stagger" style="animation-delay: 1200ms" transform="translate(25, 0)">
