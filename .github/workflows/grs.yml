@@ -1,0 +1,60 @@
+name: Update README cards
+
+on:
+  schedule:
+    - cron: "0 0 * * 0" # Runs once a week at midnight
+  pull_request:
+    types: [synchronize, reopened, ready_for_review]
+  workflow_dispatch:  # Allows manual triggering of the workflow
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-slim
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+
+      - name: Install dependencies
+        run: npm install --no-save github:readme-tools/github-readme-stats
+
+      - name: Generate all cards
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAT_1: ${{ secrets.PRIVATE_TOKEN }}
+        run: node .github/scripts/generate-cards.mjs
+
+      - name: Commit cards
+        run: |
+          # head_ref is set for pull_request events (the PR's source branch);
+          # ref_name covers push, workflow_dispatch, and schedule.
+          BRANCH="${{ github.head_ref || github.ref_name }}"
+
+          # Save the freshly generated SVGs before touching the branch
+          mkdir -p /tmp/cards
+          cp profile/*.svg /tmp/cards/
+
+          # Fast-forward to the exact current remote state so the push is
+          # always a clean fast-forward — no rebase, no merge, no conflicts
+          git fetch origin
+          git checkout -f -B "$BRANCH" "origin/$BRANCH"
+
+          # Restore the generated SVGs on top of the latest remote commit
+          mkdir -p profile
+          cp /tmp/cards/*.svg profile/
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add profile/*.svg
+          git diff --staged --quiet && exit 0
+          git commit -m "Update README cards"
+          git push origin "$BRANCH"
