@@ -3,12 +3,7 @@ name: Update README cards
 on:
   schedule:
     - cron: "0 0 * * 0" # Runs once a week at midnight
-  pull_request:
-    types: [synchronize, reopened, ready_for_review]
-  workflow_dispatch:  # Allows manual triggering of the workflow
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   build:
@@ -20,149 +15,18 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Generate stats card (dark)
-        uses: readme-tools/github-readme-stats-action@v1
+      - uses: actions/setup-node@v6
         with:
-          card: stats
-          options: username=${{ github.repository_owner }}&show_icons=true&rank_icon=percentile&show=reviews,prs_merged&theme=catppuccin_mocha
-          path: profile/stats-dark.svg
-          token: ${{ secrets.PRIVATE_TOKEN }}
+          node-version: "24"
+          cache: 'npm'
 
-      - name: Generate stats card (light)
-        uses: readme-tools/github-readme-stats-action@v1
-        with:
-          card: stats
-          options: username=${{ github.repository_owner }}&show_icons=true&rank_icon=percentile&show=reviews,prs_merged&theme=catppuccin_latte
-          path: profile/stats-light.svg
-          token: ${{ secrets.PRIVATE_TOKEN }}
+      - name: Install dependencies
+        run: npm install --no-save github:readme-tools/github-readme-stats
 
-      - name: Generate top languages card (dark)
-        uses: readme-tools/github-readme-stats-action@v1
-        with:
-          card: top-langs
-          options: username=${{ github.repository_owner }}&layout=compact&langs_count=6&theme=catppuccin_mocha
-          path: profile/top-langs-dark.svg
-          token: ${{ secrets.PRIVATE_TOKEN }}
-
-      - name: Generate top languages card (light)
-        uses: readme-tools/github-readme-stats-action@v1
-        with:
-          card: top-langs
-          options: username=${{ github.repository_owner }}&layout=compact&langs_count=6&theme=catppuccin_latte
-          path: profile/top-langs-light.svg
-          token: ${{ secrets.PRIVATE_TOKEN }}
-
-      - name: Generate pin card - AirbrakesV2 (dark)
-        uses: readme-tools/github-readme-stats-action@v1
-        with:
-          card: pin
-          options: username=NCSU-High-Powered-Rocketry-Club&repo=AirbrakesV2&show_owner=false&theme=catppuccin_mocha
-          path: profile/pin-AirbrakesV2-dark.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Generate pin card - AirbrakesV2 (light)
-        uses: readme-tools/github-readme-stats-action@v1
-        with:
-          card: pin
-          options: username=NCSU-High-Powered-Rocketry-Club&repo=AirbrakesV2&show_owner=false&theme=catppuccin_latte
-          path: profile/pin-AirbrakesV2-light.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Generate pin card - carbonpy (dark)
-        uses: readme-tools/github-readme-stats-action@v1
-        with:
-          card: pin
-          options: username=harshil21&repo=carbonpy&show_owner=false&theme=catppuccin_mocha
-          path: profile/pin-carbonpy-dark.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Generate pin card - carbonpy (light)
-        uses: readme-tools/github-readme-stats-action@v1
-        with:
-          card: pin
-          options: username=harshil21&repo=carbonpy&show_owner=false&theme=catppuccin_latte
-          path: profile/pin-carbonpy-light.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Generate pin card - python-telegram-bot (dark)
-        uses: readme-tools/github-readme-stats-action@v1
-        with:
-          card: pin
-          options: username=python-telegram-bot&repo=python-telegram-bot&show_owner=false&theme=catppuccin_mocha
-          path: profile/pin-python-telegram-bot-dark.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Generate pin card - python-telegram-bot (light)
-        uses: readme-tools/github-readme-stats-action@v1
-        with:
-          card: pin
-          options: username=python-telegram-bot&repo=python-telegram-bot&show_owner=false&theme=catppuccin_latte
-          path: profile/pin-python-telegram-bot-light.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Generate pin card - TGDates (dark)
-        uses: readme-tools/github-readme-stats-action@v1
-        with:
-          card: pin
-          options: username=harshil21&repo=TGDates&show_owner=false&theme=catppuccin_mocha
-          path: profile/pin-TGDates-dark.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Generate pin card - TGDates (light)
-        uses: readme-tools/github-readme-stats-action@v1
-        with:
-          card: pin
-          options: username=harshil21&repo=TGDates&show_owner=false&theme=catppuccin_latte
-          path: profile/pin-TGDates-light.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Generate pin card - FIRM (dark)
-        uses: readme-tools/github-readme-stats-action@v1
-        with:
-          card: pin
-          options: username=NCSU-High-Powered-Rocketry-Club&repo=FIRM&show_owner=false&theme=catppuccin_mocha
-          path: profile/pin-FIRM-dark.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Generate pin card - FIRM (light)
-        uses: readme-tools/github-readme-stats-action@v1
-        with:
-          card: pin
-          options: username=NCSU-High-Powered-Rocketry-Club&repo=FIRM&show_owner=false&theme=catppuccin_latte
-          path: profile/pin-FIRM-light.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Generate pin card - airbrakes-pi-hat (dark)
-        uses: readme-tools/github-readme-stats-action@v1
-        with:
-          card: pin
-          options: username=NCSU-High-Powered-Rocketry-Club&repo=airbrakes-pi-hat&show_owner=false&theme=catppuccin_mocha
-          path: profile/pin-airbrakes-pi-hat-dark.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Generate pin card - airbrakes-pi-hat (light)
-        uses: readme-tools/github-readme-stats-action@v1
-        with:
-          card: pin
-          options: username=NCSU-High-Powered-Rocketry-Club&repo=airbrakes-pi-hat&show_owner=false&theme=catppuccin_latte
-          path: profile/pin-airbrakes-pi-hat-light.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Generate pin card - Aloft (dark)
-        uses: readme-tools/github-readme-stats-action@v1
-        with:
-          card: pin
-          options: username=harshil21&repo=Aloft&show_owner=false&theme=catppuccin_mocha
-          path: profile/pin-Aloft-dark.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Generate pin card - Aloft (light)
-        uses: readme-tools/github-readme-stats-action@v1
-        with:
-          card: pin
-          options: username=harshil21&repo=Aloft&show_owner=false&theme=catppuccin_latte
-          path: profile/pin-Aloft-light.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Generate all cards
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node .github/scripts/generate-cards.mjs
 
       - name: Commit cards
         run: |
@@ -170,4 +34,4 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add profile/*.svg
           git commit -m "Update README cards" || exit 0
-          git push origin HEAD:${{ github.ref_name }}
+          git push origin HEAD:refs/heads/${{ github.event.repository.default_branch }}

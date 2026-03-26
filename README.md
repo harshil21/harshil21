@@ -9,6 +9,12 @@ Most of the code I ship is hand-written or, at the very least, carefully reviewe
 - [PinPointer](https://github.com/harshil21/PinPointer): This is my personal rocket, featuring many experimental technologies, with a high attention to detail. 
 - Personal website and blog: This will most importantly look really good and showcase my work!
 
+## Supporting me
+
+If you like my work and want to support me, you can:
+
+- BTC: 
+- ![Github Sponsors](https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#EA4AAA)
 
 ## Project Highlights
 
