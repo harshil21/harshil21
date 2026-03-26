@@ -30,11 +30,14 @@ jobs:
       - name: Generate all cards
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAT_1: ${{ secrets.PRIVATE_TOKEN }}
         run: node .github/scripts/generate-cards.mjs
 
       - name: Commit cards
         run: |
-          DEFAULT="${{ github.event.repository.default_branch }}"
+          # head_ref is set for pull_request events (the PR's source branch);
+          # ref_name covers push, workflow_dispatch, and schedule.
+          BRANCH="${{ github.head_ref || github.ref_name }}"
 
           # Save the freshly generated SVGs before touching the branch
           mkdir -p /tmp/cards
@@ -43,7 +46,7 @@ jobs:
           # Fast-forward to the exact current remote state so the push is
           # always a clean fast-forward — no rebase, no merge, no conflicts
           git fetch origin
-          git checkout -B "$DEFAULT" "origin/$DEFAULT"
+          git checkout -B "$BRANCH" "origin/$BRANCH"
 
           # Restore the generated SVGs on top of the latest remote commit
           mkdir -p profile
@@ -54,4 +57,4 @@ jobs:
           git add profile/*.svg
           git diff --staged --quiet && exit 0
           git commit -m "Update README cards"
-          git push origin "$DEFAULT"
+          git push origin "$BRANCH"
