@@ -13,14 +13,15 @@ Most of the code I ship is hand-written or, at the very least, carefully reviewe
 
 If you like my work and want to support me, you can:
 
-- BTC:
+- **BTC:**
 
 Taproot: bc1pcnfw98qj5t9r8paa9svtveu30x9z08755hk7kvasswdzun6k62hqdqhy7g
+
 Segwit: bc1qpc73wh3dt69wg3rgqgff66rx7d4vv5t3xtr0nk
 
-- [![Github Sponsors](https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#EA4AAA)](https://github.com/sponsors/harshil21)
+- **Github Sponsors:** [![Github Sponsors](https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#EA4AAA)](https://github.com/sponsors/harshil21)
 
-## Project Highlights
+## Notable Projects
 
 <table align="center">
   <tr>
